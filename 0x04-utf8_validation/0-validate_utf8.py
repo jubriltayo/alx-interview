@@ -28,7 +28,7 @@ def validUTF8(data):
         # check if its a 2-byte data
         elif data[i] & 0xE0 == 0xC0:
             # check if there is a next term in the sequence and of the format
-            if i + 1 >= len(data) or data[i] & 0xC0 != 0x80:
+            if i + 1 >= len(data) or data[i + 1] & 0xC0 != 0x80:
                 return False
             i += 2
         # check if its a 3-byte data
@@ -37,14 +37,14 @@ def validUTF8(data):
             if i + 2 >= len(data) or (data[i + 1] & 0xC0 != 0x80)\
                   or (data[i + 2] & 0xC0 != 0x80):
                 return False
-            i + 3
+            i += 3
         # check if its a 4-byte data
         elif data[i] & 0xF8 == 0xF0:
             # check if there are 3 more terms in the sequence and of the format
             if i + 3 >= len(data) or (data[i + 1] & 0xC0 != 0x80) or\
                   (data[i + 2] & 0xC0 != 0x80) or (data[i + 3] & 0xC0 != 0x80):
                 return False
-            i + 4
+            i += 4
         else:
             return False
 
