@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""This module defines the function `rotate_2d_matrix`"""
+
 
 def rotate_2d_matrix(matrix):
     """Rotate a 2D Matrix 90 degrees clockwise"""
