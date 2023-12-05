@@ -1,51 +1,53 @@
 #!/usr/bin/python3
-"""
-Module to find the winner of a prime game
-"""
+'''Prime Game'''
 
 
 def isWinner(x, nums):
-    """
-    Determines the winner of prime game
-    """
-
-    p1_wins = 0
-    p2_wins = 0
-    p1 = 'Maria'
-    p2 = 'Ben'
-    rounds = 0
-    # for i in nums:
-    while rounds < x:
-        i = nums[rounds]
-        no_prime = 0
-
-        for j in range(1, i + 1):
-            if is_prime(j):
-                no_prime = no_prime + 1
-
-        if no_prime % 2 == 0:
-            p2_wins = p2_wins + 1
-        else:
-            p1_wins = p1_wins + 1
-
-        rounds = rounds + 1
-
-    if p1_wins == p2_wins:
-        return None
-    elif p1_wins > p2_wins:
-        return p1
-    else:
-        return p2
-
-
-def is_prime(num):
-    """
-    Checks if number is prime
-    """
-
-    if num < 2:
-        return False
-    for i in range(2, int(num ** 0.5) + 1):
-        if num % i == 0:
+    '''
+    Prototype: def isWinner(x, nums)
+    x is the number of rounds and nums is an array of n
+    Return: name of the player that won the most rounds
+    If the winner cannot be determined, return None
+    You can assume n and x will not be larger than 10000
+    '''
+    def is_prime(n):
+        '''Function to check if a number is prime'''
+        if n <= 1:
             return False
-    return True
+        if n <= 3:
+            return True
+        if n % 2 == 0 or n % 3 == 0:
+            return False
+        i = 5
+        while i * i <= n:
+            if n % i == 0 or n % (i + 2) == 0:
+                return False
+            i += 6
+        return True
+
+    def count_primes(n):
+        '''Function to count prime numbers in a range'''
+        count = 0
+        for i in range(2, n + 1):
+            if is_prime(i):
+                count += 1
+        return count
+
+    maria_wins = 0
+    ben_wins = 0
+
+    # Iterate through each round
+    for n in nums:
+        prime_count = count_primes(n)
+        if prime_count % 2 == 0:
+            ben_wins += 1
+        else:
+            maria_wins += 1
+
+    # Determine the overall winner
+    if maria_wins > ben_wins:
+        return "Maria"
+    elif ben_wins > maria_wins:
+        return "Ben"
+    else:
+        return None
