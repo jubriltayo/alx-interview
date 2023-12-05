@@ -27,6 +27,7 @@ def isWinner(x, nums):
 
 
 def isPrime(n):
+    """Checks if a number is Prime or not"""
     if n == 2:
         return True
     if n > 1:
