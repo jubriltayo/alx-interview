@@ -1,38 +1,51 @@
 #!/usr/bin/python3
-""" This module defines the function `isWinner` """
+"""
+Module to find the winner of a prime game
+"""
 
 
 def isWinner(x, nums):
-    """ Returns the winner """
-    p1 = 0
-    p2 = 0
-    for round in range(x):
-        n = nums[round]
-        prime_counter = 0
-        for j in range(1, n + 1):
-            if isPrime(j):
-                prime_counter += 1
+    """
+    Determines the winner of prime game
+    """
 
-        if prime_counter % 2 == 0:
-            p1 += 1
+    p1_wins = 0
+    p2_wins = 0
+    p1 = 'Maria'
+    p2 = 'Ben'
+    rounds = 0
+    # for i in nums:
+    while rounds < x:
+        i = nums[rounds]
+        no_prime = 0
+
+        for j in range(1, i + 1):
+            if is_prime(j):
+                no_prime = no_prime + 1
+
+        if no_prime % 2 == 0:
+            p2_wins = p2_wins + 1
         else:
-            p2 += 1
+            p1_wins = p1_wins + 1
 
-        if p1 == p2:
-            return None
-        elif p1 > p2:
-            return 'Maria'
-        else:
-            return 'Ben'
+        rounds = rounds + 1
+
+    if p1_wins == p2_wins:
+        return None
+    elif p1_wins > p2_wins:
+        return p1
+    else:
+        return p2
 
 
-def isPrime(n):
-    """Checks if a number is Prime or not"""
-    if n == 2:
-        return True
-    if n > 1:
-        for i in range(2, n):
-            if (n % i) == 0:
-                return False
-            else:
-                return True
+def is_prime(num):
+    """
+    Checks if number is prime
+    """
+
+    if num < 2:
+        return False
+    for i in range(2, int(num ** 0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
