@@ -18,12 +18,12 @@ def isWinner(x, nums):
         else:
             p2 += 1
 
-    if p1 == p2:
-        return None
-    elif p1 > p2:
-        return 'Maria'
-    else:
-        return 'Ben'
+        if p1 == p2:
+            return None
+        elif p1 > p2:
+            return 'Maria'
+        else:
+            return 'Ben'
 
 
 def isPrime(n):
